@@ -1,49 +1,46 @@
-- name: configure frontend
-  hosts: frontend
-  become: yes
-  tasks:
-  - name: install nginx 
-    ansible.builtin.dnf:
-      name: nginx
-      state: latest
 
-  - name: start and enable nginx
-    ansible.builtin.service:
-      name: nginx
-      state: started
-      enabled: yes
+- name: install nginx 
+  ansible.builtin.dnf:
+    name: nginx
+    state: latest
 
-  - name: run app_pre_requisites
-    ansible.builtin.import_role:
-      name: common
-      tasks_from: app_pre_req
+- name: start and enable nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
 
-  # - name: removing the webiste
-  #   ansible.builtin.file:
-  #     path: /usr/share/nginx/html/
-  #     state: absent
+- name: run app_pre_requisites
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_pre_req
 
-  # - name: create a empty directory
-  #   ansible.builtin.file:
-  #     path: /usr/share/nginx/html
-  #     state: directory
+# - name: removing the webiste
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html/
+#     state: absent
 
-  # - name: download and extract zip file
-  #   ansible.builtin.unarchive:
-  #     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-  #     dest: /usr/share/nginx/html
-  #     remote_src: yes
+# - name: create a empty directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
 
-  - name: copy backend expense.conf 
-    ansible.builtin.copy:
-      src: expense.conf
-      dest: /etc/nginx/default.d/expense.conf
+# - name: download and extract zip file
+#   ansible.builtin.unarchive:
+#     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+
+- name: copy backend expense.conf 
+  ansible.builtin.copy:
+    src: expense.conf
+    dest: /etc/nginx/default.d/expense.conf
 
 
-    notify:
-    - restart the server
+  notify:
+  - restart the server
 
-  # - name: restart the nginx
-  #   ansible.builtin.service:
-  #     name: nginx
-  #     state: restarted
+# - name: restart the nginx
+#   ansible.builtin.service:
+#     name: nginx
+#     state: res
