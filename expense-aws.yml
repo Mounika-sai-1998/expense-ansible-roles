@@ -6,7 +6,7 @@
       instance_type: t3.micro
       name: "{{ item }}"
       security_group: allow-everything
-      image_id: ami-090252cbe067a9e58
+      image_id: ami-0220d79f3f480ecf5 
       tags:
         Name: "{{ item }}"
     loop:
