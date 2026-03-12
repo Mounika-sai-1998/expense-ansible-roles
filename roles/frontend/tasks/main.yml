@@ -38,7 +38,7 @@
 
 
   notify:
-  - restart the server
+  - restart the nginx
 
 # - name: restart the nginx
 #   ansible.builtin.service:
